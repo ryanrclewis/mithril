@@ -30,7 +30,7 @@ Mithril is a Docker-based DNS filtering solution that blocks adult content acros
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/docker-mithril.git
+   git clone https://github.com/ryanrclewis/docker-mithril.git
    cd docker-mithril
    ```
 
