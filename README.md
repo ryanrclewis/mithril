@@ -26,6 +26,15 @@ Mithril is a Docker-based DNS filtering solution that blocks NSFW content across
 
 ## Quick Start
 
+### Recomended Systems
+
+1. [**Raspberry Pi 4 or 5**](https://amzn.to/3Oh9BnM)
+2. [**Intel NUC**](https://amzn.to/4kwW0VP)
+3. [**NAS with Docker support (Synology, TrueNAS, TerraMaster)**](https://amzn.to/4aebVnb)
+4. **Any old PC you already have**
+
+_These are affiliate links so we may get a small kickback from purchasing with these links at no extra charge to you._ 
+
 ### Using Docker Compose (Recommended)
 
 1. **Clone the repository:**
