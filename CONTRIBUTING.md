@@ -43,7 +43,7 @@ nslookup blocked-site.com localhost
 
 ## Code of Conduct
 
-- Be respectful and inclusive
+- Strive for holiness
 - Focus on constructive feedback
 - Help maintain a welcoming community
 

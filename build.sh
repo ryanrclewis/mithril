@@ -2,7 +2,6 @@
 
 # Mithril - Build Script
 # Builds the Mithril Docker image locally
-# Forked from pi-hole/docker-pi-hole
 
 set -e
 

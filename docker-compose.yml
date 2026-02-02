@@ -1,13 +1,13 @@
 # Mithril - Docker Compose Configuration
 # Adult content DNS filter for your home network
-# https://github.com/yourusername/docker-mithril
+# https://github.com/ryanrclewis/docker-mithril
 
 services:
   mithril:
     container_name: mithril
     image: mithril:latest
     # To use the pre-built image from Docker Hub (when published), use:
-    # image: yourusername/mithril:latest
+    # image: ryanrclewis/mithril:latest
     
     ports:
       # DNS Ports - Required for DNS filtering
