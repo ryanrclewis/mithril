@@ -1,0 +1,11 @@
+# Mithril Crontab
+# Scheduled tasks for blocklist updates and maintenance
+
+# Update gravity (blocklists) weekly on Sunday at a randomized time (will be modified at runtime)
+59 1  * * 0 PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updateGravity >/var/log/pihole/pihole_updateGravity.log || cat /var/log/pihole/pihole_updateGravity.log
+
+# Flush logs daily at midnight
+00 00 * * * PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole flush once quiet
+
+# Check for updates daily (time will be randomized at runtime)
+59 17 * * * PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updatechecker

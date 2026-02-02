@@ -1,0 +1,33 @@
+# Mithril - Example Docker Compose with OpenDNS FamilyShield
+# This example uses OpenDNS FamilyShield as upstream DNS
+
+services:
+  mithril:
+    container_name: mithril
+    image: mithril:latest
+    
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    
+    environment:
+      TZ: 'America/New_York'
+      FTLCONF_webserver_api_password: 'your-secure-password'
+      FTLCONF_dns_listeningMode: 'ALL'
+      
+      # OpenDNS FamilyShield
+      # Pre-configured to block adult content
+      # https://www.opendns.com/setupguide/#familyshield
+      FTLCONF_dns_upstreams: '208.67.222.123;208.67.220.123'
+    
+    volumes:
+      - './etc-pihole:/etc/pihole'
+    
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    
+    restart: unless-stopped

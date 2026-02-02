@@ -1,0 +1,40 @@
+# Mithril - Custom Blocklists Example
+# Demonstrates how to add your own blocklists via environment variables
+
+services:
+  mithril:
+    container_name: mithril
+    image: mithril:latest
+    
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    
+    environment:
+      TZ: 'America/New_York'
+      FTLCONF_webserver_api_password: 'your-secure-password'
+      FTLCONF_dns_listeningMode: 'ALL'
+      
+      # Use Cloudflare Family DNS (blocks malware + adult content)
+      FTLCONF_dns_upstreams: '1.1.1.3;1.0.0.3'
+      
+      # Enable DNSSEC for additional security
+      FTLCONF_dns_dnssec: 'true'
+      
+      # Block clients from bypassing Mithril
+      # by blocking DNS-over-HTTPS providers
+      FTLCONF_dns_blockingMode: 'IP-NODATA-AAAA'
+    
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      # Mount a custom adlists file if you want to override defaults
+      # - './custom-adlists.list:/etc/pihole/adlists.list:ro'
+    
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    
+    restart: unless-stopped

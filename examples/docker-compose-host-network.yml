@@ -1,0 +1,36 @@
+# Mithril - Host Network Mode Example
+# Use this if you need DHCP functionality or have port conflicts
+
+services:
+  mithril:
+    container_name: mithril
+    image: mithril:latest
+    
+    # Host network mode - container shares the host's network stack
+    # Required for DHCP server functionality
+    # Note: Port mappings are ignored in host mode
+    network_mode: host
+    
+    environment:
+      TZ: 'America/New_York'
+      FTLCONF_webserver_api_password: 'your-secure-password'
+      
+      # In host mode, you may want to change the web interface port
+      # if port 80/443 is already in use
+      # FTLCONF_webserver_port: '8080o,[::]:8080o,8443os,[::]:8443os'
+      
+      # Enable DHCP if needed
+      # FTLCONF_dhcp_active: 'true'
+      # FTLCONF_dhcp_start: '192.168.1.100'
+      # FTLCONF_dhcp_end: '192.168.1.200'
+      # FTLCONF_dhcp_router: '192.168.1.1'
+    
+    volumes:
+      - './etc-pihole:/etc/pihole'
+    
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    
+    restart: unless-stopped

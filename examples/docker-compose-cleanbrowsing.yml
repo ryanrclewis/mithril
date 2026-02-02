@@ -1,0 +1,34 @@
+# Mithril - Example Docker Compose with CleanBrowsing DNS
+# This example uses CleanBrowsing Family Filter as upstream DNS
+# for additional protection at the resolver level
+
+services:
+  mithril:
+    container_name: mithril
+    image: mithril:latest
+    
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    
+    environment:
+      TZ: 'America/New_York'
+      FTLCONF_webserver_api_password: 'your-secure-password'
+      FTLCONF_dns_listeningMode: 'ALL'
+      
+      # CleanBrowsing Family Filter
+      # Blocks adult content, proxies, VPNs, and mixed adult content
+      # https://cleanbrowsing.org/filters/
+      FTLCONF_dns_upstreams: '185.228.168.168;185.228.169.168'
+    
+    volumes:
+      - './etc-pihole:/etc/pihole'
+    
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    
+    restart: unless-stopped

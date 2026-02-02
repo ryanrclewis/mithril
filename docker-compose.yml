@@ -1,0 +1,61 @@
+# Mithril - Docker Compose Configuration
+# Adult content DNS filter for your home network
+# https://github.com/yourusername/docker-mithril
+
+services:
+  mithril:
+    container_name: mithril
+    image: mithril:latest
+    # To use the pre-built image from Docker Hub (when published), use:
+    # image: yourusername/mithril:latest
+    
+    ports:
+      # DNS Ports - Required for DNS filtering
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Web Interface - HTTP
+      - "80:80/tcp"
+      # Web Interface - HTTPS (self-signed certificate)
+      - "443:443/tcp"
+      # DHCP - Uncomment if using Mithril as your DHCP server
+      #- "67:67/udp"
+    
+    environment:
+      # Set your timezone (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+      TZ: 'America/New_York'
+      
+      # Web interface password - CHANGE THIS!
+      # If not set, a random password will be generated and shown in logs
+      FTLCONF_webserver_api_password: 'changeme'
+      
+      # DNS listening mode - Required for Docker bridge network
+      FTLCONF_dns_listeningMode: 'ALL'
+      
+      # Upstream DNS servers - Mithril defaults to Cloudflare Family (1.1.1.3)
+      # which provides additional adult content blocking at the DNS resolver level
+      # Alternatives:
+      #   - Cloudflare Family (malware + adult): 1.1.1.3;1.0.0.3
+      #   - CleanBrowsing Family: 185.228.168.168;185.228.169.168
+      #   - OpenDNS FamilyShield: 208.67.222.123;208.67.220.123
+      # FTLCONF_dns_upstreams: '1.1.1.3;1.0.0.3'
+    
+    volumes:
+      # Persist Pi-hole configuration and databases
+      - './etc-pihole:/etc/pihole'
+      # Uncomment for custom dnsmasq configuration
+      #- './etc-dnsmasq.d:/etc/dnsmasq.d'
+    
+    cap_add:
+      # Required for DHCP server functionality
+      - NET_ADMIN
+      # Allow setting system time via NTP
+      - SYS_TIME
+      # Optional: Give Pi-hole higher process priority
+      - SYS_NICE
+    
+    restart: unless-stopped
+
+# Optional: Create a separate network for Mithril
+# networks:
+#   mithril-net:
+#     driver: bridge
