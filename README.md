@@ -4,7 +4,7 @@
 
 <div align="center">
   <h3>⚔️ Mithril</h3>
-  <strong>DNS-based adult content filter for your home network</strong>
+  <strong>DNS-based NSFW content filter for your home network</strong>
   <br><br>
   <em>Forked from <a href="https://github.com/pi-hole/docker-pi-hole">pi-hole/docker-pi-hole</a></em>
 </div>
@@ -13,11 +13,11 @@
 
 ## What is Mithril?
 
-Mithril is a Docker-based DNS filtering solution that blocks adult content across your entire network. Built on the powerful Pi-hole platform, it uses curated blocklists specifically targeting adult/NSFW websites to keep your home network safe and secure.
+Mithril is a Docker-based DNS filtering solution that blocks NSFW content across your entire network. Built on the powerful Pi-hole platform, it uses curated blocklists specifically targeting NSFW websites to keep your home network safe and secure.
 
 ### Key Features
 
-- 🚫 **Adult Content Blocking** - Pre-configured with comprehensive adult content blocklists
+- 🚫 **NSFW Content Blocking** - Pre-configured with comprehensive NSFW content blocklists
 - 🌐 **Network-Wide Protection** - Protects all devices on your network automatically
 - 📊 **Web Dashboard** - Easy-to-use interface for monitoring and management
 - 🔒 **Secure DNS** - Defaults to Cloudflare Family DNS (1.1.1.3) for additional protection
@@ -77,17 +77,17 @@ services:
 
 ## Pre-configured Blocklists
 
-Mithril comes pre-configured with the following adult content blocklists:
+Mithril comes pre-configured with the following NSFW content blocklists:
 
 | Blocklist | Description |
 |-----------|-------------|
-| [StevenBlack Unified + Porn](https://github.com/StevenBlack/hosts) | Comprehensive hosts file with porn extension |
+| [StevenBlack Unified + NSFW](https://github.com/StevenBlack/hosts) | Comprehensive hosts file with NSFW extension |
 | [OISD NSFW](https://oisd.nl/) | Well-maintained, frequently updated NSFW list |
-| [StevenBlack Porn Extensions](https://github.com/StevenBlack/hosts) | Additional porn-blocking extensions |
-| [Chad Mayfield's Porn Top 1M](https://github.com/chadmayfield/my-pihole-blocklists) | Top 1 million porn sites |
-| [Sinfonietta Pornography](https://github.com/Sinfonietta/hostfiles) | Pornography hosts file |
-| [BigDargon HostsVN Adult](https://github.com/bigdargon/hostsVN) | Vietnamese adult content list |
-| [Energized Porn](https://energized.pro/) | Energized protection porn list |
+| [StevenBlack NSFW Extensions](https://github.com/StevenBlack/hosts) | Additional NSFW-blocking extensions |
+| [Chad Mayfield's Top 1M](https://github.com/chadmayfield/my-pihole-blocklists) | Top 1 million NSFW sites |
+| [Sinfonietta NSFW](https://github.com/Sinfonietta/hostfiles) | NSFW hosts file |
+| [BigDargon HostsVN NSFW](https://github.com/bigdargon/hostsVN) | Vietnamese NSFW content list |
+| [Energized NSFW](https://energized.pro/) | Energized protection NSFW list |
 
 ## Configuration
 
@@ -104,13 +104,13 @@ Mithril comes pre-configured with the following adult content blocklists:
 
 ### Recommended Upstream DNS Servers
 
-Mithril defaults to Cloudflare Family DNS, which provides additional adult content blocking at the resolver level:
+Mithril defaults to Cloudflare Family DNS, which provides additional NSFW content blocking at the resolver level:
 
 | Provider | Primary | Secondary | Features |
 |----------|---------|-----------|----------|
-| **Cloudflare Family** | `1.1.1.3` | `1.0.0.3` | Malware + Adult blocking |
-| **CleanBrowsing Family** | `185.228.168.168` | `185.228.169.168` | Adult + Proxies + VPNs |
-| **OpenDNS FamilyShield** | `208.67.222.123` | `208.67.220.123` | Adult content blocking |
+| **Cloudflare Family** | `1.1.1.3` | `1.0.0.3` | Malware + NSFW blocking |
+| **CleanBrowsing Family** | `185.228.168.168` | `185.228.169.168` | NSFW + Proxies + VPNs |
+| **OpenDNS FamilyShield** | `208.67.222.123` | `208.67.220.123` | NSFW content blocking |
 
 To change upstream DNS, set the `FTLCONF_dns_upstreams` environment variable:
 
@@ -202,7 +202,7 @@ docker logs mithril
 ### Test DNS resolution
 ```bash
 # Should return 0.0.0.0 or Pi-hole IP for blocked sites
-nslookup pornhub.com YOUR_MITHRIL_IP
+nslookup NSFW_SITE YOUR_MITHRIL_IP
 
 # Should resolve normally for allowed sites
 nslookup google.com YOUR_MITHRIL_IP
